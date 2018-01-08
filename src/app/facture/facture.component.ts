@@ -13,9 +13,10 @@ export class Element{
 
 export class Facture {
   docType : String;
-  number: String;
-  datee: String;
+  numero: number;
+  date: String;
   to: String;
+  totalPrice: number;
   elements: Array <Element>; 
 }
 
@@ -29,9 +30,9 @@ export class FactureComponent implements OnInit {
   title = 'TP ASI';
   elementType : 'url' | 'canvas' | 'img' = 'url';
   docType: string = "facture";
-  number: string = "23";
+  numero: number = 0;
   date: string = "10-02-2017";
-  to : string = "Anis";
+  to : string = "A";
   subTotal: number=0;
   taxAmount: number=0;
   total: number=0;
@@ -74,7 +75,7 @@ export class FactureComponent implements OnInit {
     this.fac.number = this.number;
     this.fac.to =this.to;
     this.fac.elements = [this.element1,this.element2]; */
-    fac =  { "datee": "10-02-2017","docType" : this.docType, "number": this.number, "to": this.to,
+    fac =  { "date": "10-02-2017","docType" : this.docType, "numero": this.numero,"totalPrice": this.total, "to": this.to,
     "elements": [  element1 = {"description": "x","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}
     ,element2= {"description": "y","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}]};
     
@@ -100,10 +101,11 @@ export class FactureComponent implements OnInit {
     }
     this.total = this.subTotal + this.taxAmount;
     console.log(this.total);
-    this.facture.datee = this.date;
+    this.facture.date = this.date;
     this.facture.docType= this.docType;
-    this.facture.number = this.number;
+    this.facture.numero = this.numero;
     this.facture.to= this.to;
+    this.facture.totalPrice= this.total;
     this.facture.elements = this.fieldArray;
     this.visible = true;
     this.value = JSON.stringify(this.facture);
