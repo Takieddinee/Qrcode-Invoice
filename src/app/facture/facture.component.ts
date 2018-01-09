@@ -36,18 +36,12 @@ export class FactureComponent implements OnInit {
   subTotal: number=0;
   taxAmount: number=0;
   total: number=0;
-  /* description: string[]=["x","y"];
-  quantity: string[]=["10","20"];
-  unitPrice: string[]=["10","20"];
-  totalPrice: string[]=["100","400"];
-  tax: string[]=["0","0  "]; */
   value : string = '';
   i = 0;
   visible = false;
   private fieldArray: Array<Element> = new Array<Element>();
-    private newAttribute: any = {};
-  elements : Element[] = [{"description": "x","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}
-  ,{"description": "y","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}];
+  private newAttribute: any = {};
+
 
   facture = new Facture();
 
@@ -55,39 +49,12 @@ export class FactureComponent implements OnInit {
 
 
   constructor(){
-    
- /*   this.value="{ docType: "+ this.docType +", " +"number: "+ this.number + ", date: "+ this.date +", to: "+this.to;
-  while(this.i< this.description.length){
-    if (this.i == 0) this.value= this.value + ", elements: ["
-    this.value = this.value + "{description: "+ this.description[this.i]+ ", quantity: "+ this.quantity[this.i]
-    + ", unitPrice: "+this.unitPrice[this.i]+", tax: "+this.tax[this.i]+", totalPrice: "+this.totalPrice[this.i]
-    + " },"
-    this.i = this.i + 1;
-    if(this.i == this.description.length) this.value = this.value + " ] }"
-  } */
   
-    let fac = new Facture();
-    let element1= new Element() ;
-    let element2 = new Element();
-        
-    /* this.fac.datee= "10-02-2017";
-    this.fac.docType = this.docType;
-    this.fac.number = this.number;
-    this.fac.to =this.to;
-    this.fac.elements = [this.element1,this.element2]; */
-    fac =  { "date": "10-02-2017","docType" : this.docType, "numero": this.numero,"total": this.total, "to": this.to,
-    "elements": [  element1 = {"description": "x","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}
-    ,element2= {"description": "y","quantity": 10 ,"totalPrice": 100, "tax": 0,"unitPrice": 10}]};
-    
-    this.value = JSON.stringify(fac);
-    console.log('hh');
-
   }
   
   
 
   calculerResultat(){
-    console.log(this.fieldArray);
     this.i = 0;
     this.subTotal =0;
     this.total = 0;
@@ -97,10 +64,8 @@ export class FactureComponent implements OnInit {
       this.subTotal = this.subTotal + this.fieldArray[this.i].unitPrice * this.fieldArray[this.i].quantity;
       this.taxAmount = this.taxAmount +  this.fieldArray[this.i].tax * this.fieldArray[this.i].unitPrice * this.fieldArray[this.i].quantity;
       this.i = this.i + 1;
-
     }
     this.total = this.subTotal + this.taxAmount;
-    console.log(this.total);
     this.facture.date = this.date;
     this.facture.docType= this.docType;
     this.facture.numero = this.numero;
@@ -112,7 +77,10 @@ export class FactureComponent implements OnInit {
 
   }
 
-  
+  printPage(): void {
+    window.print()
+}
+
   addFieldValue() {
     this.fieldArray.push(this.newAttribute)
     this.newAttribute = {};

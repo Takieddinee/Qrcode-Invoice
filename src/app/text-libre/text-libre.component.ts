@@ -31,4 +31,8 @@ export class TextLibreComponent implements OnInit {
 
   }
 
+  printPage(): void {
+    window.print()
+}
+
 }
